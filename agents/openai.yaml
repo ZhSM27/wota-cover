@@ -1,4 +1,4 @@
 interface:
   display_name: "wota艺封面制作"
   short_description: "适配不同颜色和曲线形态，由看图模型选帧，制作保色残影与调色封面"
-  default_prompt: "使用 $wota-cover 添加保色残影，由看图模型挑选曲线流畅美观、构图清楚的帧，再对照原片调整光芯和背景制作封面。"
+  default_prompt: "使用 $wotagei-cover 添加保色残影，由看图模型挑选曲线流畅美观、构图清楚的帧，再对照原片调整光芯和背景制作封面。"

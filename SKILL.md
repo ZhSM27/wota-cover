@@ -1,5 +1,5 @@
 ---
-name: wota-cover
+name: wotagei-cover
 description: 制作 wota艺、打艺和荧光棒表演的视频残影与封面，适配不同颜色及形态的光轨；由看图模型挑选流畅美观的曲线，支持保色叠加与遮罩调色。
 ---
 
@@ -21,7 +21,7 @@ description: 制作 wota艺、打艺和荧光棒表演的视频残影与封面�
 ## 流程
 
 1. 检查尺寸、长度、帧率、音轨和裁剪范围。未指定拖尾时从约 0.4 秒开始，按动作速度、曲线流畅度和画面层次调整，不固定某个帧数。
-2. 用 `scripts/wota_cover.py render` 裁剪并生成等亮度残影，保留同步原声，检查起点预热和末尾边界，保留原视频。
+2. 用 `scripts/wotagei_cover.py render` 裁剪并生成等亮度残影，保留同步原声，检查起点预热和末尾边界，保留原视频。
 3. 用 `contact` 生成带时间和帧号的联系表，将图像实际展示给看图模型。短片段逐帧查看，长片段先粗选再查相邻帧。模型按曲线的流畅感、走势、疏密层次、人物姿态、视觉重心和背景干扰综合判断，选 2–4 个候选并查看原尺寸细节，再确定封面。开放端点和自然出画可成为构图的一部分，不默认视为缺陷；只避免破坏主要动作表达的意外截断或杂乱堆叠。必要时调整历史长度或选段，不为凑形状延长或补画光轨。脚本不负责审美判断；无看图能力时提供候选让用户选，不声称已自动选出最佳帧。
 4. 将片段内选帧时间加上裁剪起点，用 `cover` 回到源视频重建光轨，避免在反复调色压缩的图片上修补。
 5. 查看 `-light-mask.png`。白为保留光轨，黑为背景。运动衣物、镜头移动、闪灯会误选，静止光轨可能漏选；必要时提供同尺寸灰度 `--light-mask`。人物另用 `--protect-mask` 免受背景压暗。
@@ -35,9 +35,9 @@ description: 制作 wota艺、打艺和荧光棒表演的视频残影与封面�
 以下时间为可替换的通用示例：
 
 ```powershell
-python scripts/wota_cover.py render --input "source.mp4" --start 10 --end 12 --trail-seconds 0.4 --output "clip.mp4"
-python scripts/wota_cover.py contact --input "clip.mp4" --step 1 --output "contact.jpg"
-python scripts/wota_cover.py cover --input "source.mp4" --time 11 --trail-seconds 0.4 --output "cover.png" --comparison "compare.jpg"
+python scripts/wotagei_cover.py render --input "source.mp4" --start 10 --end 12 --trail-seconds 0.4 --output "clip.mp4"
+python scripts/wotagei_cover.py contact --input "clip.mp4" --step 1 --output "contact.jpg"
+python scripts/wotagei_cover.py cover --input "source.mp4" --time 11 --trail-seconds 0.4 --output "cover.png" --comparison "compare.jpg"
 ```
 
 - 默认沿用源帧率，`--fps` 为显式覆盖。`--frames` 与 `--trail-seconds` 互斥，默认约 0.4 秒，换算 `round(seconds*fps)+1`。实际时长量化到整帧，记录实际结果，不改变播放速度。

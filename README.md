@@ -19,27 +19,27 @@
 Windows PowerShell：
 
 ```powershell
-git clone https://github.com/ZhSM27/wota-cover.git "$env:USERPROFILE/.codex/skills/wota-cover"
-python -m pip install -r "$env:USERPROFILE/.codex/skills/wota-cover/requirements.txt"
+git clone https://github.com/ZhSM27/wotagei-cover.git "$env:USERPROFILE/.codex/skills/wotagei-cover"
+python -m pip install -r "$env:USERPROFILE/.codex/skills/wotagei-cover/requirements.txt"
 ```
 
 macOS / Linux：
 
 ```sh
-git clone https://github.com/ZhSM27/wota-cover.git "${CODEX_HOME:-$HOME/.codex}/skills/wota-cover"
-python3 -m pip install -r "${CODEX_HOME:-$HOME/.codex}/skills/wota-cover/requirements.txt"
+git clone https://github.com/ZhSM27/wotagei-cover.git "${CODEX_HOME:-$HOME/.codex}/skills/wotagei-cover"
+python3 -m pip install -r "${CODEX_HOME:-$HOME/.codex}/skills/wotagei-cover/requirements.txt"
 ```
 
-目录已存在时先检查内容，或在对应 Git 仓库内执行 `git pull`。在新会话中用 `$wota-cover` 提供视频路径、时间范围和目标效果。
+目录已存在时先检查内容，或在对应 Git 仓库内执行 `git pull`。在新会话中用 `$wotagei-cover` 提供视频路径、时间范围和目标效果。
 
 ## 命令行
 
 在仓库根目录运行。下列时间仅为任意示例，按自己的素材替换：
 
 ```sh
-python scripts/wota_cover.py render --input source.mp4 --start 10 --end 12 --trail-seconds 0.4 --output clip.mp4
-python scripts/wota_cover.py contact --input clip.mp4 --step 1 --output contact.jpg
-python scripts/wota_cover.py cover --input source.mp4 --time 11 --trail-seconds 0.4 --output cover.png --comparison compare.jpg
+python scripts/wotagei_cover.py render --input source.mp4 --start 10 --end 12 --trail-seconds 0.4 --output clip.mp4
+python scripts/wotagei_cover.py contact --input clip.mp4 --step 1 --output contact.jpg
+python scripts/wotagei_cover.py cover --input source.mp4 --time 11 --trail-seconds 0.4 --output cover.png --comparison compare.jpg
 ```
 
 联系表时间相对片段；加上裁剪起点后，才是 `cover --time` 使用的源视频绝对时间。
@@ -73,7 +73,7 @@ python scripts/wota_cover.py cover --input source.mp4 --time 11 --trail-seconds 
 自动遮罩不检查固定色相，而是结合最大通道亮度与时间变化；因此不会刻意把某一种颜色当作背景。它仍可能误选运动衣物、闪灯和镜头移动，漏掉静止光弧。应先查看遮罩，再用同源尺寸的灰度 PNG 修正：白选光轨、黑为背景、灰为羽化。人物可单独提供保护遮罩。
 
 ```sh
-python scripts/wota_cover.py cover --input source.mp4 --time 11 --output masked-cover.png --light-mask light-mask.png --protect-mask person-mask.png --background 0.2
+python scripts/wotagei_cover.py cover --input source.mp4 --time 11 --output masked-cover.png --light-mask light-mask.png --protect-mask person-mask.png --background 0.2
 ```
 
 先看源帧、未调色光轨和遮罩，再分轮调整光芯、曝光和背景，实际查看后再继续。详见 [调色说明](references/tuning.md)。默认数值是保守起点，不代表所有素材的最优设置。

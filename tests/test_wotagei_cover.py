@@ -10,8 +10,8 @@ import numpy as np
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = ROOT / 'scripts' / 'wota_cover.py'
-spec = importlib.util.spec_from_file_location('wota_cover', SCRIPT)
+SCRIPT = ROOT / 'scripts' / 'wotagei_cover.py'
+spec = importlib.util.spec_from_file_location('wotagei_cover', SCRIPT)
 wota = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(wota)
 
