@@ -1,0 +1,4 @@
+interface:
+  display_name: "wota艺封面制作"
+  short_description: "适配多种颜色光弧，制作保色等亮度残影、完整光环与遮罩调色封面"
+  default_prompt: "使用 $wota-cover 处理这段 wota艺视频：添加保色残影、挑选完整光环，并对照原片提亮光芯、压暗背景制作封面。"
